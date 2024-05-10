@@ -2,35 +2,16 @@
 #include <fstream>
 #include <vector>
 #include <cmath> 
+#include <numeric>
 
 using namespace std;
 
-int mcd(int a, int b) {
-    a = std::abs(a);
-    b = std::abs(b);
-    
-    if (a == 0) return b;
-    if (b == 0) return a;
-    
-    while (b != 0) {
-        int temp = b;
-        b = a % b;
-        a = temp;
-    }
-    return a;
-}
-
-int mcm(int a, int b) {
-    return std::abs(a * b) / mcd(a, b);
-}
-
-int Solve(int N, vector<int>& V) {
+int Solve(int N, std::vector<int>& V) {
     int risposta;
 
-    // Add your code here...
     risposta = V[0];
     for (int i = 1; i < N; ++i) {
-        risposta = mcm(risposta, V[i]);
+        risposta = std::lcm(risposta, V[i]);
     }
     return risposta;
 }
