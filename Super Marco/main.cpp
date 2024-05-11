@@ -22,21 +22,20 @@ William ha quindi fatto prendere la scossa a Super Marco per ben 2 volte. La dom
 in media, quante volte si prende la scossa prima di trovare l’ordine corretto? Ad esempio, nel caso appena
 citato in cui n = 3, si può dimostrare facilmente che la scossa si prende in media 1.5 volte.
 
+ La risposta verrà considerata corretta se l’errore assoluto o relativo non supererà 10^-6.
+
 esempio: input = 3 output = 1.5
          input = 4 output = 3
 
 */
 
 double scosse(int n) {
-    vector<double> dp(n + 1, 0);
-    dp[1] = 0;
-    dp[2] = 1;
-    for (int i = 3; i <= n; i++) {
-        dp[i] = 1 + (dp[i - 1] + dp[i - 2]) / 2;
+    double risultato = 0.0;
+    for (int i = 2; i <= n; i++) {
+        risultato += 1.0 / (i - 1);
     }
-    return dp[n];
+    return risultato;
 }
-
 
 int main() {
     FILE *fr, *fw;
