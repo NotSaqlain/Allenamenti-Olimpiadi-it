@@ -2,34 +2,32 @@
 #include <cassert>
 #include <utility>
 #include <vector>
+#include <map>
 
 using namespace std;
 
-bool autogrill_stato[1018] = {false};
+map<long long, bool> autogrill_stato;
 
 void inizia() {
-    for (int i = 0; i < 1018; ++i) {
-        autogrill_stato[i] = false;
-    }
+    autogrill_stato.clear();
 }
 
 void apri(long long p) {
-    autogrill_stato[p - 1] = true;
+    autogrill_stato[p] = true;
 }
 
 void chiudi(long long p) {
-    autogrill_stato[p - 1] = false;
+    autogrill_stato[p] = false;
 }
 
 long long chiedi(long long p) {
-    for (int i = p - 1; i < 1018; ++i) {
-        if (autogrill_stato[i]) {
-            return i + 1;
+    for (auto it = autogrill_stato.begin(); it != autogrill_stato.end(); ++it) {
+        if (it->second) {
+            return it->first;
         }
     }
     return -1;
 }
-
 
 int main() {
     int Q;
